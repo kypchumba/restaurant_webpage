@@ -101,6 +101,24 @@
     this.classList.toggle('bi-x')
   })
 
+  /* Close mobile navbar when clicking outside the menu */
+  document.addEventListener('click', function(e) {
+    const navbar = select('#navbar');
+    const menu = select('#navbar ul');
+    const toggle = select('.mobile-nav-toggle');
+  
+    if (!navbar.classList.contains('navbar-mobile')) return;
+  
+    // Allow clicks inside the menu and hamburger
+    if (menu.contains(e.target) || toggle.contains(e.target)) return;
+  
+    // Close navbar
+    navbar.classList.remove('navbar-mobile');
+  
+    toggle.classList.remove('bi-x');
+    toggle.classList.add('bi-list');
+  });
+
   /*Mobile nav dropdowns activate*/
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
@@ -233,5 +251,6 @@
       mirror: false
     })
   });
+
 
 })()
